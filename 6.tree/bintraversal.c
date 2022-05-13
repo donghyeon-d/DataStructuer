@@ -97,6 +97,46 @@ void	levelOrderTraversalBinTree(BinTree *pBinTree)
 	}
 }
 
+BinTreeNode		*BinTreeLastNode(BinTree *pBinTree)
+{
+	LinkedQueue		*queue;
+	LinkedQueueNode	dummy;
+	LinkedQueueNode	*temp;
+	BinTreeNode		*curr;
+
+	if (pBinTree == NULL)
+		return (NULL);
+	curr = getRootNodeBT(pBinTree);
+	if (curr == NULL)
+		return (NULL);
+	queue = createLinkedQueue();
+	dummy.data = curr;
+	enqueueLQ(queue, &dummy);
+	while (!isLinkedQueueEmpty(queue))
+	{
+		temp = dequeueLQ(queue);
+		curr = (BinTreeNode *)(temp->data);
+		printf("%c", curr->data);
+		if (curr->pLeftChild != NULL)
+		{
+			dummy.data = curr->pLeftChild;
+			enqueueLQ(queue, &dummy);
+		}
+		if (curr->pRightChild != NULL)
+		{
+			dummy.data = curr->pRightChild;
+			enqueueLQ(queue, &dummy);
+		}
+		if (isLinkedQueueEmpty(queue))
+		{
+			curr = (BinTreeNode *)(temp->data);
+			return (curr);
+		}
+		free(temp);
+	}
+	return (NULL);
+}
+
 int main(void)
 {
 	BinTree		*tree;
