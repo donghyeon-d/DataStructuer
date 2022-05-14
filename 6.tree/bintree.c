@@ -75,6 +75,8 @@ void    deleteBinTree(BinTree* pBinTree)
     free(pBinTree);
 }
 
+ // pNode가 NULL로 초기화가 안되기 때문에, pNode의 부모노드는 여전히 자식을 갖고있는거로 됨. 널 초기화 필요(함수 안이든 밖이든)
+ // 함수 밖에서  pNode의 부모->pNode = NULL; 해줘야함
 void    deleteBinTreeNode(BinTreeNode* pNode)
 {
     if (pNode == NULL)
