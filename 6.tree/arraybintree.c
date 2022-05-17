@@ -82,15 +82,15 @@ void    displayArrayBinTree(ArrayBinTree *bintree)
     printf("|\n");
 }
 
-int main()
-{
-    ArrayBinTree    *bintree;
+// int main()
+// {
+//     ArrayBinTree    *bintree;
 
-    bintree = makeArrayBinTree(5);
-    insertInorder(bintree, 'a');
-    insertInorder(bintree, 'b');
-    insertInorder(bintree, 'c');
-    insertInorder(bintree, 'd');
-    insertInorder(bintree, 'e');
-    displayArrayBinTree(bintree);
-}
+//     bintree = makeArrayBinTree(5);
+//     insertInorder(bintree, 'a');
+//     insertInorder(bintree, 'b');
+//     insertInorder(bintree, 'c');
+//     insertInorder(bintree, 'd');
+//     insertInorder(bintree, 'e');
+//     displayArrayBinTree(bintree);
+// }

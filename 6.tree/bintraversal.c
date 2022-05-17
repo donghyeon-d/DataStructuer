@@ -63,135 +63,135 @@ void	postorderTraversalBinTree(BinTree *pBinTree)
 	postorderTraversal(root);
 }
 
-void	levelOrderTraversalBinTree(BinTree *pBinTree)
-{
-	LinkedQueue		*queue;
-	LinkedQueueNode	dummy;
-	LinkedQueueNode	*temp;
-	BinTreeNode		*curr;
+// void	levelOrderTraversalBinTree(BinTree *pBinTree)
+// {
+// 	LinkedQueue		*queue;
+// 	LinkedQueueNode	dummy;
+// 	LinkedQueueNode	*temp;
+// 	BinTreeNode		*curr;
 
-	if (pBinTree == NULL)
-		return ;
-	curr = getRootNodeBT(pBinTree);
-	if (curr == NULL)
-		return ;
-	queue = createLinkedQueue();
-	dummy.data = curr;
-	enqueueLQ(queue, &dummy);
-	while (!isLinkedQueueEmpty(queue))
-	{
-		temp = dequeueLQ(queue);
-		curr = (BinTreeNode *)(temp->data);
-		printf("%c", curr->data);
-		if (curr->pLeftChild != NULL)
-		{
-			dummy.data = curr->pLeftChild;
-			enqueueLQ(queue, &dummy);
-		}
-		if (curr->pRightChild != NULL)
-		{
-			dummy.data = curr->pRightChild;
-			enqueueLQ(queue, &dummy);
-		}
-		free(temp);
-	}
-}
+// 	if (pBinTree == NULL)
+// 		return ;
+// 	curr = getRootNodeBT(pBinTree);
+// 	if (curr == NULL)
+// 		return ;
+// 	queue = createLinkedQueue();
+// 	dummy.data = curr;
+// 	enqueueLQ(queue, &dummy);
+// 	while (!isLinkedQueueEmpty(queue))
+// 	{
+// 		temp = dequeueLQ(queue);
+// 		curr = (BinTreeNode *)(temp->data);
+// 		printf("%c", curr->data);
+// 		if (curr->pLeftChild != NULL)
+// 		{
+// 			dummy.data = curr->pLeftChild;
+// 			enqueueLQ(queue, &dummy);
+// 		}
+// 		if (curr->pRightChild != NULL)
+// 		{
+// 			dummy.data = curr->pRightChild;
+// 			enqueueLQ(queue, &dummy);
+// 		}
+// 		free(temp);
+// 	}
+// }
 
-BinTreeNode		*BinTreeLastNode(BinTree *pBinTree)
-{
-	LinkedQueue		*queue;
-	LinkedQueueNode	dummy;
-	LinkedQueueNode	*temp;
-	BinTreeNode		*curr;
+// BinTreeNode		*BinTreeLastNode(BinTree *pBinTree)
+// {
+// 	LinkedQueue		*queue;
+// 	LinkedQueueNode	dummy;
+// 	LinkedQueueNode	*temp;
+// 	BinTreeNode		*curr;
 
-	if (pBinTree == NULL)
-		return (NULL);
-	curr = getRootNodeBT(pBinTree);
-	if (curr == NULL)
-		return (NULL);
-	queue = createLinkedQueue();
-	dummy.data = curr;
-	enqueueLQ(queue, &dummy);
-	while (!isLinkedQueueEmpty(queue))
-	{
-		temp = dequeueLQ(queue);
-		curr = (BinTreeNode *)(temp->data);
-		printf("%c", curr->data);
-		if (curr->pLeftChild != NULL)
-		{
-			dummy.data = curr->pLeftChild;
-			enqueueLQ(queue, &dummy);
-		}
-		if (curr->pRightChild != NULL)
-		{
-			dummy.data = curr->pRightChild;
-			enqueueLQ(queue, &dummy);
-		}
-		if (isLinkedQueueEmpty(queue))
-		{
-			curr = (BinTreeNode *)(temp->data);
-			return (curr);
-		}
-		free(temp);
-	}
-	return (NULL);
-}
+// 	if (pBinTree == NULL)
+// 		return (NULL);
+// 	curr = getRootNodeBT(pBinTree);
+// 	if (curr == NULL)
+// 		return (NULL);
+// 	queue = createLinkedQueue();
+// 	dummy.data = curr;
+// 	enqueueLQ(queue, &dummy);
+// 	while (!isLinkedQueueEmpty(queue))
+// 	{
+// 		temp = dequeueLQ(queue);
+// 		curr = (BinTreeNode *)(temp->data);
+// 		printf("%c", curr->data);
+// 		if (curr->pLeftChild != NULL)
+// 		{
+// 			dummy.data = curr->pLeftChild;
+// 			enqueueLQ(queue, &dummy);
+// 		}
+// 		if (curr->pRightChild != NULL)
+// 		{
+// 			dummy.data = curr->pRightChild;
+// 			enqueueLQ(queue, &dummy);
+// 		}
+// 		if (isLinkedQueueEmpty(queue))
+// 		{
+// 			curr = (BinTreeNode *)(temp->data);
+// 			return (curr);
+// 		}
+// 		free(temp);
+// 	}
+// 	return (NULL);
+// }
 
-int main(void)
-{
-	BinTree		*tree;
-	BinTreeNode	dummy;
-	BinTreeNode *pA;
-	BinTreeNode *pB;
-	BinTreeNode *pC;
-	BinTreeNode *pD;
-	BinTreeNode *pE;
-	BinTreeNode *pF;
-	BinTreeNode *pG;
-	BinTreeNode *pH;
-	BinTreeNode *pI;
-	BinTreeNode *pJ;
-	BinTreeNode *pK;
-	BinTreeNode *pL;
-	BinTreeNode *pM;
+// int main(void)
+// {
+// 	BinTree		*tree;
+// 	BinTreeNode	dummy;
+// 	BinTreeNode *pA;
+// 	BinTreeNode *pB;
+// 	BinTreeNode *pC;
+// 	BinTreeNode *pD;
+// 	BinTreeNode *pE;
+// 	BinTreeNode *pF;
+// 	BinTreeNode *pG;
+// 	BinTreeNode *pH;
+// 	BinTreeNode *pI;
+// 	BinTreeNode *pJ;
+// 	BinTreeNode *pK;
+// 	BinTreeNode *pL;
+// 	BinTreeNode *pM;
 	
-	dummy.data = 'A';
-	dummy.visited = FALSE;
-	dummy.pLeftChild = NULL;
-	dummy.pRightChild = NULL;
-	tree = makeBinTree(dummy);
-	dummy.data = 'B';
-	pB = insertLeftChildNodeBT(getRootNodeBT(tree), dummy);
-	dummy.data = 'C';
-	pC = insertRightChildNodeBT(getRootNodeBT(tree), dummy);
-	dummy.data = 'D';
-	pD = insertLeftChildNodeBT(pB, dummy);
-	dummy.data = 'E';
-	pE = insertRightChildNodeBT(pB, dummy);
-	dummy.data = 'F';
-	pF = insertLeftChildNodeBT(pC, dummy);
-	dummy.data = 'G';
-	pG = insertRightChildNodeBT(pC, dummy);
-	dummy.data = 'H';
-	pH = insertLeftChildNodeBT(pD, dummy);
-	dummy.data = 'I';
-	pI = insertRightChildNodeBT(pD, dummy);
-	dummy.data = 'J';
-	pJ = insertLeftChildNodeBT(pE, dummy);
-	dummy.data = 'K';
-	pK = insertRightChildNodeBT(pF, dummy);
-	dummy.data = 'L';
-	pL = insertLeftChildNodeBT(pG, dummy);
-	dummy.data = 'M';
-	pM = insertRightChildNodeBT(pG, dummy);
+// 	dummy.data = 'A';
+// 	dummy.visited = FALSE;
+// 	dummy.pLeftChild = NULL;
+// 	dummy.pRightChild = NULL;
+// 	tree = makeBinTree(dummy);
+// 	dummy.data = 'B';
+// 	pB = insertLeftChildNodeBT(getRootNodeBT(tree), dummy);
+// 	dummy.data = 'C';
+// 	pC = insertRightChildNodeBT(getRootNodeBT(tree), dummy);
+// 	dummy.data = 'D';
+// 	pD = insertLeftChildNodeBT(pB, dummy);
+// 	dummy.data = 'E';
+// 	pE = insertRightChildNodeBT(pB, dummy);
+// 	dummy.data = 'F';
+// 	pF = insertLeftChildNodeBT(pC, dummy);
+// 	dummy.data = 'G';
+// 	pG = insertRightChildNodeBT(pC, dummy);
+// 	dummy.data = 'H';
+// 	pH = insertLeftChildNodeBT(pD, dummy);
+// 	dummy.data = 'I';
+// 	pI = insertRightChildNodeBT(pD, dummy);
+// 	dummy.data = 'J';
+// 	pJ = insertLeftChildNodeBT(pE, dummy);
+// 	dummy.data = 'K';
+// 	pK = insertRightChildNodeBT(pF, dummy);
+// 	dummy.data = 'L';
+// 	pL = insertLeftChildNodeBT(pG, dummy);
+// 	dummy.data = 'M';
+// 	pM = insertRightChildNodeBT(pG, dummy);
 
 
-	preorderTraversalBinTree(tree);
-	printf("\n");
-	inorderTraversalBinTree(tree);
-	printf("\n");
-	postorderTraversalBinTree(tree);
-	printf("\n");
-	levelOrderTraversalBinTree(tree);
-	return (0);
-}
+// 	preorderTraversalBinTree(tree);
+// 	printf("\n");
+// 	inorderTraversalBinTree(tree);
+// 	printf("\n");
+// 	postorderTraversalBinTree(tree);
+// 	printf("\n");
+// 	levelOrderTraversalBinTree(tree);
+// 	return (0);
+// }
