@@ -20,6 +20,24 @@ ArrayBinTree	*makeArrayBinTree(int maxElementCount)
     return (bintree);
 }
 
+int	isArrayBinTreeFull(ArrayBinTree *pbintree)
+{
+	if (pbintree == NULL || pbintree->pElement == NULL)
+		return (-1);
+	if (pbintree->maxElementCount == pbintree->currentElementCount)
+		return (1);
+	return (0);
+}
+
+int	isArrayBinTreeEmpty(ArrayBinTree *pbintree)
+{
+	if (pbintree == NULL || pbintree->pElement == NULL)
+		return (-1);
+	if (pbintree->currentElementCount == 0)
+		return (1);
+	return (0);
+}
+
 int insertLeftChildNodeABT(ArrayBinTree *bintree, int parentIndex, int data) // 부모 인덱스가 있는게 애매한듯
 {
     int index;
@@ -77,15 +95,31 @@ int searchDataIndex(ArrayBinTree *bintree, int data)// O(n) 앞부터 쭉
     return (-1);
 }
 
+ArrayBinTreeNode *deleteArrayBinTree(ArrayBinTree *pbintree)
+{
+	ArrayBinTreeNode *temp;
+
+	if (pbintree == NULL || pbintree->pElement == NULL || pbintree->currentElementCount == 0)
+		return (NULL);
+	temp = malloc(sizeof(ArrayBinTreeNode));
+	if (temp == NULL)
+		return (NULL);
+	temp = &(pbintree->pElement)[pbintree->currentElementCount];
+	pbintree->currentElementCount--;
+	return (temp);
+}
+
 void    displayArrayBinTree(ArrayBinTree *bintree)
 {
     int i;
 
     i = 0;
+	if (bintree == NULL || bintree->pElement == NULL)
+		return ;
     printf("    Max Element Count : %d\n", bintree->maxElementCount);
     printf("Current Element Count : %d\n", bintree->currentElementCount);
     while (++i <= bintree->currentElementCount)
-        printf("| [%d] %c ", i, bintree->pElement[i].data);
+        printf("| [%d] %d ", i, (bintree->pElement)[i].data);
     printf("|\n");
 }
 
