@@ -20,65 +20,72 @@ ArrayBinTree	*makeArrayBinTree(int maxElementCount)
     return (bintree);
 }
 
-int insertLeftChildNodeABT(ArrayBinTree *bintree, int rootIndex, int data)
+int insertLeftChildNodeABT(ArrayBinTree *bintree, int parentIndex, int data) // 부모 인덱스가 있는게 애매한듯
 {
     int index;
 
-    index = rootIndex * 2;
-    if (bintree == NULL || rootIndex < 0 || rootIndex > bintree->maxElementCount || bintree->maxElementCount == bintree->currentElementCount || bintree->currentElementCount == 0)
-        return (0);
+    index = parentIndex * 2;
+    if (bintree == NULL || parentIndex < 1 || index > bintree->maxElementCount || \
+	bintree->maxElementCount == bintree->currentElementCount)
+        return (-1);
+	if (bintree->currentElementCount == 0)
+		index = 1;
     bintree->pElement[index].data = data;
     bintree->currentElementCount++;
     return (index);
 }
+
 int insertRightChildNodeABT(ArrayBinTree *bintree, int rootIndex, int data)
 {
     int index;
 
     index = rootIndex * 2 + 1;
-    if (bintree == NULL || rootIndex < 0 || rootIndex > bintree->maxElementCount || bintree->maxElementCount == bintree->currentElementCount || bintree->currentElementCount == 0)
-        return (0);
+    if (bintree == NULL || rootIndex < 0 || rootIndex > bintree->maxElementCount || \
+	bintree->maxElementCount == bintree->currentElementCount)
+        return (-1);
+	if (bintree->currentElementCount == 0)
+		index = 1;
     bintree->pElement[index].data = data;
     bintree->currentElementCount++;
     return (index);
 }
 
-void	insertInorder(ArrayBinTree	*bintree, int data)
+int	insertInorder(ArrayBinTree	*bintree, int data)
 {
     int index;
 
-    if (bintree == NULL || bintree->maxElementCount == bintree->currentElementCount)
-        return ;
+    if (bintree == NULL || bintree->pElement == NULL || bintree->maxElementCount == bintree->currentElementCount)
+        return (-1);
     index = bintree->currentElementCount + 1;
     bintree->pElement[index].data = data;
     bintree->currentElementCount++;
+	return (index);
 }
 
-int findDataIndex(ArrayBinTree	*bintree, int data)
+int searchDataIndex(ArrayBinTree *bintree, int data)// O(n) 앞부터 쭉
 {
     int index;
 
+	if (bintree == NULL || bintree->pElement == NULL)
+		return (-1);
     index = 0;
-    while(index < bintree->currentElementCount)
+    while(++index <= bintree->currentElementCount)
     {
         if (bintree->pElement[index].data == data)
             return (index);
     }
-    return (0);
+    return (-1);
 }
 
 void    displayArrayBinTree(ArrayBinTree *bintree)
 {
     int i;
 
-    i = 1;
+    i = 0;
     printf("    Max Element Count : %d\n", bintree->maxElementCount);
     printf("Current Element Count : %d\n", bintree->currentElementCount);
-    while (i <= bintree->currentElementCount)
-    {
+    while (++i <= bintree->currentElementCount)
         printf("| [%d] %c ", i, bintree->pElement[i].data);
-        i++;
-    }
     printf("|\n");
 }
 

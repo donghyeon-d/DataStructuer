@@ -16,8 +16,8 @@ typedef struct ArrayBinTreeType
 ArrayBinTree	*makeArrayBinTree(int maxElementCount);
 int				insertLeftChildNodeABT(ArrayBinTree	*bintree, int rootIndex, int data);//index return
 int				insertRightChildNodeABT(ArrayBinTree	*bintree, int rootIndex, int data);//index return
-void			insertInorder(ArrayBinTree	*bintree, int data);
-int				 findDataIndex(ArrayBinTree	*bintree, int data);
+int				insertInorder(ArrayBinTree	*bintree, int data);
+int				searchDataIndex(ArrayBinTree	*bintree, int data);
 void			displayArrayBinTree(ArrayBinTree	*arraybintree);
 
 #endif
