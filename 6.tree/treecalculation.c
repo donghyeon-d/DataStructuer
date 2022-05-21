@@ -5,7 +5,7 @@
 #include "treecalculation.h"
 #include "bintraversal.h"
 
-// array binary tree duplicate 
+// array binary tree duplicate. expand maxElementCount
 ArrayBinTree	*dupleArrayBinTree(ArrayBinTree *pbintree, int maxElementCount)
 {
     ArrayBinTree *newbintree;
@@ -87,7 +87,7 @@ int	isEqualBintree(BinTree *pBinTreeA, BinTree *pBinTreeB)
     return (FALSE);
 }
 
-// binary tree count
+// binary tree count Node
 static int countBintreeUtil(BinTreeNode *pBinTreeNode, int *count)
 {
     if (pBinTreeNode == NULL)
@@ -106,6 +106,32 @@ int countBintree(BinTree *pBinTree)
         return (0);
     count = 0;
     count = countBintreeUtil(pBinTree->pRootNode, &count);
+    return (count);
+}
+
+// binary tree count leafs
+static int countBintreeLeafNodeUtil(BinTreeNode *pBinTreeNode, int *count)
+{
+    if (pBinTreeNode->pLeftChild == NULL && pBinTreeNode->pRightChild == NULL)
+    {
+        (*count)++;
+        return (*count);
+    }
+    if (pBinTreeNode->pLeftChild != NULL)
+        countBintreeLeafNodeUtil(pBinTreeNode->pLeftChild, count);
+    if (pBinTreeNode->pRightChild != NULL)
+    countBintreeLeafNodeUtil(pBinTreeNode->pRightChild, count);
+    return (*count);
+}
+
+int countBintreeLeafNode(BinTree *pBinTree)
+{
+    int count;
+
+    if (pBinTree == NULL || pBinTree->pRootNode == NULL)
+        return (0);
+    count = 0;
+    count = countBintreeLeafNodeUtil(pBinTree->pRootNode, &count);
     return (count);
 }
 
@@ -172,4 +198,6 @@ int main()
     printf("equal : %d\n", e);
     printf("count A : %d\n", ca);
     printf("count B : %d\n", cb);
+
+    printf("leaf node count : %d\n", countBintreeLeafNode(treeA));
 }
