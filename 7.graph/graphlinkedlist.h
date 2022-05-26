@@ -1,32 +1,38 @@
-#ifndef _GRAPH_LINKEDLIST_
-#define _GRAPH_LINKEDLIST_
+#ifndef _GRAPH_LinkedGraph_
+#define _GRAPH_LinkedGraph_
 
 typedef struct GraphVertexType
 {
-	int vertexID;		// ³ëµå ID
-	int weight;			// °¡ÁßÄ¡.
+	int vertexID;		// ï¿½ï¿½ï¿½ ID
+	int weight;			// ï¿½ï¿½ï¿½ï¿½Ä¡.
 } GraphVertex;
 
-typedef struct ListNodeType
+typedef struct LinkedGraphVertexType
 {
 	GraphVertex data;
-	struct ListNodeType* pLink;
-} ListNode;
+	struct LinkedGraphVertexType* ppAdjEdge;
+} LinkedGraphVertex;
 
-typedef struct LinkedListType
+typedef struct LinkedGraphType
 {
-	int currentElementCount;	// ÇöÀç ÀúÀåµÈ ¿ø¼ÒÀÇ °³¼ö
-	ListNode headerNode;		// Çì´õ ³ëµå(Header Node)
-} LinkedList;
+	int maxVertexCount;
+	int currentVertexCount;
+	int graphType;
+	LinkedGraphVertex *pVertex;
+} LinkedGraph;
 
-LinkedList* createLinkedList();
-int addLLElement(LinkedList* pList, int position, ListNode element);
-int removeLLElement(LinkedList* pList, int position);
-ListNode* getLLElement(LinkedList* pList, int position);
+LinkedGraph* createLinkedGraph(int maxVertexCount);
+LinkedGraph* createArrayDirectedGraph(int maxVertexCount);
+void deleteLinkedGraph(LinkedGraph* pGraph);
+int isEmptyAG(LinkedGraph* pGraph);
+int addVertexAG(LinkedGraph* pGraph, int vertexID);
+int addEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID);
+int addEdgewithWeightAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, int weight);
+int checkVertexValid(LinkedGraph* pGraph, int vertexID);
+int removeVertexAG(LinkedGraph* pGraph, int vertexID);
+int removeEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID);
+void displayLinkedGraph(LinkedGraph* pGraph);
 
-void clearLinkedList(LinkedList* pList);
-int getLinkedListLength(LinkedList* pList);
-void deleteLinkedList(LinkedList* pList);
 #endif
 
 #ifndef _COMMON_LIST_DEF_
