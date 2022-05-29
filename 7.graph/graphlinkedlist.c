@@ -24,6 +24,7 @@ LinkedGraph* createLinkedGraph(int maxVertexCount)
     {
         (rtn->pVertex)[i].data.vertexID = -1;
         (rtn->pVertex)[i].data.weight = 0;
+        (rtn->pVertex)[i].data.visited = 0;
         (rtn->pVertex)[i].ppAdjEdge = NULL;
     }
     return (rtn);
@@ -239,28 +240,28 @@ void displayLinkedGraph(LinkedGraph* pGraph)
     }
 }
 
-int main()
-{
-    LinkedGraph *pGraph;
+// int main()
+// {
+//     LinkedGraph *pGraph;
 
-    pGraph = createLinkedGraph(5);
-    printf("<<< Init Graph >>> \n");
-    displayLinkedGraph(pGraph);
+//     pGraph = createLinkedGraph(5);
+//     printf("<<< Init Graph >>> \n");
+//     displayLinkedGraph(pGraph);
     
-    for (int i = 0; i < 5 ; i++)
-    {
-        addVertexLG(pGraph, i);
-    }
-    printf("\n<<< Add Vertex >>> \n");
-    displayLinkedGraph(pGraph);
+//     for (int i = 0; i < 5 ; i++)
+//     {
+//         addVertexLG(pGraph, i);
+//     }
+//     printf("\n<<< Add Vertex >>> \n");
+//     displayLinkedGraph(pGraph);
 
-    addEdgeLG(pGraph, 1, 4);
-    addEdgewithWeightLG(pGraph, 0, 1, 2);
-    addEdgewithWeightLG(pGraph, 1, 2, 3);
-    addEdgewithWeightLG(pGraph, 2, 3, 4);
-    addEdgewithWeightLG(pGraph, 3, 4, 5);
-    printf("\n<<< Add Edge >>> \n");
-    displayLinkedGraph(pGraph);
+//     addEdgeLG(pGraph, 1, 4);
+//     addEdgewithWeightLG(pGraph, 0, 1, 2);
+//     addEdgewithWeightLG(pGraph, 1, 2, 3);
+//     addEdgewithWeightLG(pGraph, 2, 3, 4);
+//     addEdgewithWeightLG(pGraph, 3, 4, 5);
+//     printf("\n<<< Add Edge >>> \n");
+//     displayLinkedGraph(pGraph);
 
-    // system("leaks a.out");
-}
+//     // system("leaks a.out");
+// }
