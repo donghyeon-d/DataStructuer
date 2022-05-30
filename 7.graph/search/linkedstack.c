@@ -24,7 +24,7 @@ int pushLS(LinkedStack* pStack, StackNode element)
 	newNode = malloc(sizeof(StackNode));
 	if (newNode == NULL)
 		return (FALSE);
-	newNode->data = element.data;
+	newNode->vertexID = element.vertexID;
 	newNode->pLink = pStack->pTopElement;
 	pStack->pTopElement = newNode;
 	pStack->currentElementCount++;
@@ -93,7 +93,7 @@ void displayLinkedStack(LinkedStack* pList)
 	position = 0;
 	while (temp)
 	{
-		printf("LinkedStack[%d] : %c\n", position, temp->data);
+		printf("LinkedStack[%d] : %c\n", position, temp->vertexID);
 		temp = temp->pLink;
         position++;
 	}
@@ -105,40 +105,40 @@ void	print_line(char *str)
 	printf("%s%s%s\n", line, str, line);
 }
 
-int	main()
-{
-	LinkedStack	*stack;
-	StackNode	*temp;
+// int	main()
+// {
+// 	LinkedStack	*stack;
+// 	StackNode	*temp;
 
-	stack = createLinkedStack();
-	print_line("emptyTest");
-	printf("empty result : %d", isLinkedStackEmpty(stack));
-	printf("\n\n");
+// 	stack = createLinkedStack();
+// 	print_line("emptyTest");
+// 	printf("empty result : %d", isLinkedStackEmpty(stack));
+// 	printf("\n\n");
 
-	print_line("pushTest");
-	printf("push result : %d\n", pushLS(stack, (StackNode){'a', NULL}));
-	printf("push result : %d\n", pushLS(stack, (StackNode){'b', NULL}));
-	printf("push result : %d\n", pushLS(stack, (StackNode){'c', NULL}));
-	printf("push result : %d\n", pushLS(stack, (StackNode){'d', NULL}));
-	printf("push result : %d\n", pushLS(stack, (StackNode){'e', NULL}));
-	displayLinkedStack(stack);
-	printf("\n\n");
+// 	print_line("pushTest");
+// 	printf("push result : %d\n", pushLS(stack, (StackNode){'a', NULL}));
+// 	printf("push result : %d\n", pushLS(stack, (StackNode){'b', NULL}));
+// 	printf("push result : %d\n", pushLS(stack, (StackNode){'c', NULL}));
+// 	printf("push result : %d\n", pushLS(stack, (StackNode){'d', NULL}));
+// 	printf("push result : %d\n", pushLS(stack, (StackNode){'e', NULL}));
+// 	displayLinkedStack(stack);
+// 	printf("\n\n");
 	
-	print_line("peekTest");
-	printf("peekNode data : %c\n", peekLS(stack)->data);
-	displayLinkedStack(stack);
-	printf("\n\n");
+// 	print_line("peekTest");
+// 	printf("peekNode data : %c\n", peekLS(stack)->data);
+// 	displayLinkedStack(stack);
+// 	printf("\n\n");
 
-	print_line("popTest");
-	temp = popLS(stack);
-	printf("popNode data : %c\n", temp->data);
-	displayLinkedStack(stack);
-	free(temp);
-	printf("\n\n");
+// 	print_line("popTest");
+// 	temp = popLS(stack);
+// 	printf("popNode data : %c\n", temp->data);
+// 	displayLinkedStack(stack);
+// 	free(temp);
+// 	printf("\n\n");
 
-	deleteLinkedStack(stack);
-	displayLinkedStack(stack);
+// 	deleteLinkedStack(stack);
+// 	displayLinkedStack(stack);
 
-	system("leaks a.out");
-	return 0;
-}
+// 	system("leaks a.out");
+// 	return 0;
+// }

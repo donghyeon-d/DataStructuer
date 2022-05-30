@@ -27,24 +27,24 @@ int isLinkedQueueEmpty(LinkedQueue* pLQueue)
 
 int enqueueLQ(LinkedQueue* pLQueue, LinkedQueueNode *element)
 {
-    LinkedQueueNode *newLinkedQueueNode;
+    LinkedQueueNode *newNode;
 
-    if (pLQueue == NULL)
+    if (pLQueue == NULL || element == NULL)
         return (ERROR);
-    newLinkedQueueNode = (LinkedQueueNode *)malloc(sizeof(LinkedQueueNode));
-    if (newLinkedQueueNode == NULL)
+    newNode = malloc(sizeof(LinkedQueueNode));
+    if (newNode == NULL)
         return (FALSE);
-    newLinkedQueueNode->data = element->data;
-    newLinkedQueueNode->pLink = NULL;
+    *newNode = *element;
+    newNode->pLink = NULL;
     if (isLinkedQueueEmpty(pLQueue))
     {
-        pLQueue->pFrontNode = newLinkedQueueNode;
-        pLQueue->pRearNode = newLinkedQueueNode;
+        pLQueue->pFrontNode = newNode;
+        pLQueue->pRearNode = newNode;
     }
     else
     {
-        pLQueue->pRearNode->pLink = newLinkedQueueNode;
-        pLQueue->pRearNode = newLinkedQueueNode;
+        pLQueue->pRearNode->pLink = newNode;
+        pLQueue->pRearNode = newNode;
     }
     pLQueue->currentElementCount++;
     return (TRUE);
@@ -52,44 +52,21 @@ int enqueueLQ(LinkedQueue* pLQueue, LinkedQueueNode *element)
 
 LinkedQueueNode *dequeueLQ(LinkedQueue* pLQueue)
 {
-    LinkedQueueNode *lq;
+    LinkedQueueNode *dequeNode;
 
-    if (pLQueue == NULL)
-    {
-        printf("LinkedQueue is NULL\n");
+    if (pLQueue == NULL || isLinkedQueueEmpty(pLQueue))
         return (NULL);
-    }
-    if (isLinkedQueueEmpty(pLQueue))
-    {
-        printf("LinkedQueue is Empty\n");
-        return (NULL);
-    }
-    lq = pLQueue->pFrontNode;
+    dequeNode = pLQueue->pFrontNode;
     pLQueue->pFrontNode = pLQueue->pFrontNode->pLink;
     pLQueue->currentElementCount--;
-    return (lq);
+    return (dequeNode);
 }
 
 LinkedQueueNode *peekLQ(LinkedQueue* pLQueue)//copy
 {
-    LinkedQueueNode *lq;
-
-    if (pLQueue == NULL)
-    {
-        printf("LinkedQueue is NULL\n");
+    if (pLQueue == NULL || isLinkedQueueEmpty(pLQueue))
         return (NULL);
-    }
-    if (isLinkedQueueEmpty(pLQueue))
-    {
-        printf("LinkedQueue is Empty\n");
-        return (NULL);
-    }
-    lq = (LinkedQueueNode *)malloc(sizeof(LinkedQueueNode));
-    if (lq == NULL)
-        return (NULL);
-    lq->data = pLQueue->pFrontNode->data;
-    lq->pLink = pLQueue->pFrontNode->pLink;
-    return (lq);
+    return (pLQueue->pFrontNode);
 }
 
 void deleteLinkedQueue(LinkedQueue* pLQueue)
@@ -98,11 +75,6 @@ void deleteLinkedQueue(LinkedQueue* pLQueue)
 
     if (pLQueue == NULL)
         return ;
-    if (isLinkedQueueEmpty(pLQueue))
-    {
-        printf("LinkedQueue is Empty\n");
-        return ;
-    }
     while (pLQueue->currentElementCount > 0)
     {
         temp = dequeueLQ(pLQueue);

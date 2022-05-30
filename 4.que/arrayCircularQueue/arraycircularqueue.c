@@ -29,7 +29,7 @@ ArrayCircularQueue* createArrayCircularQueue(int maxElementCount)
 int isArrayCircularQueueFull(ArrayCircularQueue* pACQueue)
 {
     if (pACQueue == NULL)
-        return (ERROR);
+        return (FALSE);
     if (pACQueue->maxElementCount == pACQueue->currentElementCount)
         return (TRUE);
     return (FALSE);
@@ -38,7 +38,7 @@ int isArrayCircularQueueFull(ArrayCircularQueue* pACQueue)
 int isArrayCircularQueueEmpty(ArrayCircularQueue* pACQueue)
 {
     if (pACQueue == NULL)
-        return (ERROR);
+        return (FALSE);
     if (pACQueue->currentElementCount == 0)
         return (TRUE);
     return (FALSE);
@@ -46,22 +46,11 @@ int isArrayCircularQueueEmpty(ArrayCircularQueue* pACQueue)
 
 int enqueueACQ(ArrayCircularQueue* pACQueue, ArrayCircularQueueNode element)
 {
-    if (isArrayCircularQueueFull(pACQueue))
-    {
-        printf("ArrayCircularQueue is Full");
-        return (ERROR);
-    }
-    if (pACQueue == NULL)
-    {
-        printf("ArrayCircularQueue is NULL");
-        return (ERROR);
-    }
-    // if (isArrayQueueEmpty(pACQueue))
-    // {
-    //     pACQueue->rear = 0;
-    //     pACQueue->front = 0;
-    // }
-    if (isArrayCircularQueueEmpty(pACQueue) == 0)
+    if (pACQueue == NULL || isArrayCircularQueueFull(pACQueue))
+        return (FALSE);
+    if (isArrayCircularQueueEmpty(pACQueue))
+		pACQueue->rear = pACQueue->front;
+	else
         pACQueue->rear = (pACQueue->rear + 1) % pACQueue->maxElementCount;
     (pACQueue->pElement)[pACQueue->rear] = element;
     pACQueue->currentElementCount++;
@@ -72,45 +61,22 @@ ArrayCircularQueueNode *dequeueACQ(ArrayCircularQueue* pACQueue)
 {
     ArrayCircularQueueNode *dequeue;
 
-    if (isArrayCircularQueueEmpty(pACQueue) > 0)
-    {
-        printf("ArrayCircularQueue is Empty\n");
-        return(NULL);
-    }
-    if (pACQueue == NULL)
-    {
-        printf("ArrayCircularQueue is NULL\n");
+    if (pACQueue == NULL || isArrayCircularQueueEmpty(pACQueue) > 0)
         return (NULL);
-    }
-    dequeue = &(pACQueue->pElement)[pACQueue->front];
+	dequeue = malloc(sizeof(ArrayCircularQueueNode));
+	if (dequeue == NULL)
+		return (NULL);
+	*dequeue = (pACQueue->pElement)[pACQueue->front];
+    pACQueue->front = (pACQueue->front + 1) % pACQueue->maxElementCount;
     pACQueue->currentElementCount--;
-    pACQueue->front++;
-    pACQueue->front %= pACQueue->maxElementCount;
     return (dequeue);
 }
 
 ArrayCircularQueueNode *peekACQ(ArrayCircularQueue* pACQueue)
 {
-    ArrayCircularQueueNode *peek;
-
-    if (isArrayCircularQueueEmpty(pACQueue) > 0)
-    {
-        printf("ArrayCircularQueue is Empty\n");
-        return(NULL);
-    }
-    if (pACQueue == NULL)
-    {
-        printf("ArrayCircularQueue is NULL\n");
+    if (pACQueue == NULL || isArrayCircularQueueEmpty(pACQueue) > 0)
         return (NULL);
-    }
-    peek = malloc(sizeof(ArrayCircularQueueNode));
-    if (peek == NULL)
-    {
-        printf("malloc error\n");
-        return (NULL);
-    }
-    peek->data = (pACQueue->pElement)[pACQueue->front].data;
-    return (peek);
+    return (&((pACQueue->pElement)[pACQueue->front]));
 }
 
 void deleteArrayCircularQueue(ArrayCircularQueue* pACQueue)
@@ -185,8 +151,11 @@ int main()
 
     printf("\n< dequeueACQ 3times >\n");
     temp = dequeueACQ(acq); printf("dequeueACQ.data : %c | ", temp->data); displayACq(acq);
+	free(temp);
     temp = dequeueACQ(acq); printf("dequeueACQ.data : %c | ", temp->data); displayACq(acq);
+	free(temp);
     temp = dequeueACQ(acq); printf("dequeueACQ.data : %c | ", temp->data); displayACq(acq);
+	free(temp);
 
     printf("\n< canCircularEnqueueCount >\n");
     printf("canCircularEnqueueCount : %d\n", canCircularEnqueueCount(acq));

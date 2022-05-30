@@ -51,15 +51,17 @@ int pushAS(ArrayStack* pStack, StackNode element)
 
 StackNode *popAS(ArrayStack* pStack)
 {
-    StackNode *temp;
+    StackNode *popNode;
 
     if (!pStack || isArrayStackEmpty(pStack))
         return (NULL);
-    temp = &((pStack->pElement)[pStack->currentElementCount - 1]);
+	popNode = malloc(sizeof(StackNode));
+	if (popNode == NULL)
+		return (NULL);
+	*popNode = (pStack->pElement)[pStack->currentElementCount - 1];
     pStack->currentElementCount--;
-    return (temp);
+    return (popNode);
 }
-//새로 푸쉬되면 값이 바뀌니까, 주소가 아니라 값을 받아서 리턴해주거나 복사해서 리턴해줘야할듯
 
 StackNode* peekAS(ArrayStack* pStack)
 {

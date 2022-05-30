@@ -53,6 +53,7 @@ ArrayBinTreeNode	*deleteMaxHeap(ArrayBinTree *pbintree)
 	return (pdelete);
 }
 
+<<<<<<< HEAD
 int	insertMinHeap(ArrayBinTree *pbintree, int data)
 {
 	int	index;
@@ -104,6 +105,8 @@ ArrayBinTreeNode	*deleteMinHeap(ArrayBinTree *pbintree)
 	return (pdelete);
 }
 
+=======
+>>>>>>> b173593f5676b37e1aa5e36aeeef49501d5f73a1
 int main()
 {
 	ArrayBinTree *ptree;
@@ -118,6 +121,7 @@ int main()
 	// insertMaxHeap(ptree, 6);
 	// insertMaxHeap(ptree, 7);
 
+<<<<<<< HEAD
 	insertMinHeap(ptree, 7);
 	insertMinHeap(ptree, 6);
 	insertMinHeap(ptree, 5);
@@ -131,5 +135,11 @@ int main()
 	// pnode = deleteMaxHeap(ptree);
 	pnode = deleteMinHeap(ptree);
 	printf("delete : %d\n", pnode->data);
+=======
+	displayArrayBinTree(ptree);
+
+	pnode = deleteMaxHeap(ptree);
+	// printf("delete : %d\n", pnode->data);
+>>>>>>> b173593f5676b37e1aa5e36aeeef49501d5f73a1
 	displayArrayBinTree(ptree);
 }

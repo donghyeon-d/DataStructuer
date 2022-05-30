@@ -3,7 +3,7 @@
 
 typedef struct ArrayQueueNodeType
 {
-	char data;
+	char data; 
 } ArrayQueueNode;
 
 typedef struct ArrayQueueType
@@ -16,15 +16,12 @@ typedef struct ArrayQueueType
 } ArrayQueue;
 
 ArrayQueue* createArrayQueue(int maxElementCount);
-int isArrayQueueFull(ArrayQueue* pQueue);
-int isArrayQueueEmpty(ArrayQueue* pQueue);
-int canEnqueueCount(ArrayQueue* pQueue);
 int enqueueAQ(ArrayQueue* pQueue, ArrayQueueNode element);
 ArrayQueueNode *dequeueAQ(ArrayQueue* pQueue);
 ArrayQueueNode *peekAQ(ArrayQueue* pQueue);
 void deleteArrayQueue(ArrayQueue* pQueue);
-ArrayQueue* copyArrayQueue(ArrayQueue* pQueue, int maxElementCount);
-void    displayAq(ArrayQueue* pQueue);
+int isArrayQueueFull(ArrayQueue* pQueue);
+int isArrayQueueEmpty(ArrayQueue* pQueue);
 
 #endif
 
@@ -33,6 +30,5 @@ void    displayAq(ArrayQueue* pQueue);
 
 #define TRUE		1
 #define FALSE		0
-#define ERROR		-1
 
 #endif

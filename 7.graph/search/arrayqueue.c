@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "arrayqueue_dongchoi.h"
+#include "arrayqueue.h"
 
 ArrayQueue* createArrayQueue(int maxElementCount)
 {
@@ -51,13 +51,16 @@ int canEnqueueCount(ArrayQueue* pQueue)
 
 int enqueueAQ(ArrayQueue* pQueue, ArrayQueueNode element)
 {
+	ArrayQueueNode	node;
+
     if (pQueue == NULL || isArrayQueueFull(pQueue))
         return (FALSE);
+	node = element;
     if (isArrayQueueEmpty(pQueue))
         pQueue->rear = pQueue->front;
     else
         pQueue->rear++;
-    (pQueue->pElement)[pQueue->rear] = element;
+    (pQueue->pElement)[pQueue->rear] = node;
     pQueue->currentElementCount++;
     return (TRUE);
 }
@@ -133,65 +136,65 @@ void    displayAq(ArrayQueue* pQueue)
     {
         printf("front ");
         while (++n < pQueue->currentElementCount)
-            printf("| %c ", (pQueue->pElement[pQueue->front + n]).data);
+            printf("| %c ", (pQueue->pElement[pQueue->front + n]).vertexID);
         printf("| end\n");
     }
 }
 
-int main()
-{
-    ArrayQueue *aq;
-    ArrayQueue *aq2;
-    ArrayQueueNode *temp;
+// int main()
+// {
+//     ArrayQueue *aq;
+//     ArrayQueue *aq2;
+//     ArrayQueueNode *temp;
 
-    // createArrayQueue
-    aq = createArrayQueue(5);
-    printf("< createArrayQueue >\n");
-    displayAq(aq);
-    printf("Maxcount : %d\n", aq->maxElementCount);
+//     // createArrayQueue
+//     aq = createArrayQueue(5);
+//     printf("< createArrayQueue >\n");
+//     displayAq(aq);
+//     printf("Maxcount : %d\n", aq->maxElementCount);
     
-    printf("\n< isArrayQueueEmpty >\n");
-    printf("isArrayQueueEmpty : %d\n", isArrayQueueEmpty(aq));
+//     printf("\n< isArrayQueueEmpty >\n");
+//     printf("isArrayQueueEmpty : %d\n", isArrayQueueEmpty(aq));
 
-    printf("\n< enqueueAQ 3times >\n");
-    enqueueAQ(aq, (ArrayQueueNode){'a'});
-    displayAq(aq);
-    enqueueAQ(aq, (ArrayQueueNode){'b'});
-    displayAq(aq);
-    enqueueAQ(aq, (ArrayQueueNode){'c'});
-    displayAq(aq);
+//     printf("\n< enqueueAQ 3times >\n");
+//     enqueueAQ(aq, (ArrayQueueNode){'a'});
+//     displayAq(aq);
+//     enqueueAQ(aq, (ArrayQueueNode){'b'});
+//     displayAq(aq);
+//     enqueueAQ(aq, (ArrayQueueNode){'c'});
+//     displayAq(aq);
 
-    printf("\n< canEnqueueCount >\n");
-    printf("canEnqueueCount : %d\n", canEnqueueCount(aq));
+//     printf("\n< canEnqueueCount >\n");
+//     printf("canEnqueueCount : %d\n", canEnqueueCount(aq));
 
-    printf("\n< enqueueAQ 2times >\n");
-    enqueueAQ(aq, (ArrayQueueNode){'d'});
-    displayAq(aq);
-    enqueueAQ(aq, (ArrayQueueNode){'e'});
-    displayAq(aq);
+//     printf("\n< enqueueAQ 2times >\n");
+//     enqueueAQ(aq, (ArrayQueueNode){'d'});
+//     displayAq(aq);
+//     enqueueAQ(aq, (ArrayQueueNode){'e'});
+//     displayAq(aq);
 
-    printf("\n< isArrayQueueFull >\n");
-    printf("isArrayQueueFull : %d\n", isArrayQueueFull(aq));
+//     printf("\n< isArrayQueueFull >\n");
+//     printf("isArrayQueueFull : %d\n", isArrayQueueFull(aq));
 
-    printf("\n< copyArrayQueue >\n");
-    aq2 = copyArrayQueue(aq, aq->maxElementCount);
-    displayAq(aq2);
+//     printf("\n< copyArrayQueue >\n");
+//     aq2 = copyArrayQueue(aq, aq->maxElementCount);
+//     displayAq(aq2);
 
-    printf("\n< dequeueAQ 3times >\n");
-    temp = dequeueAQ(aq); printf("dequeueAQ.data : %c | ", temp->data); displayAq(aq);
-	free(temp);
-    temp = dequeueAQ(aq); printf("dequeueAQ.data : %c | ", temp->data); displayAq(aq);
-	free(temp);
-    temp = dequeueAQ(aq); printf("dequeueAQ.data : %c | ", temp->data); displayAq(aq);
-	free(temp);
+//     printf("\n< dequeueAQ 3times >\n");
+//     temp = dequeueAQ(aq); printf("dequeueAQ.data : %c | ", temp->data); displayAq(aq);
+// 	free(temp);
+//     temp = dequeueAQ(aq); printf("dequeueAQ.data : %c | ", temp->data); displayAq(aq);
+// 	free(temp);
+//     temp = dequeueAQ(aq); printf("dequeueAQ.data : %c | ", temp->data); displayAq(aq);
+// 	free(temp);
 
-    printf("\n< peekAQ >\n");
-    temp = peekAQ(aq);
-    printf("peekAQ : %c\n", temp->data);
+//     printf("\n< peekAQ >\n");
+//     temp = peekAQ(aq);
+//     printf("peekAQ : %c\n", temp->data);
 
-    printf("\n< deleteArrayQueue >\n");
-    deleteArrayQueue(aq);
-    aq = NULL;
-    displayAq(aq);
-    system("leaks a.out");
-}
+//     printf("\n< deleteArrayQueue >\n");
+//     deleteArrayQueue(aq);
+//     aq = NULL;
+//     displayAq(aq);
+//     system("leaks a.out");
+// }

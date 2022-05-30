@@ -3,7 +3,7 @@
 
 typedef struct ArrayQueueNodeType
 {
-	char data;
+	int vertexID;
 } ArrayQueueNode;
 
 typedef struct ArrayQueueType
@@ -23,7 +23,7 @@ int enqueueAQ(ArrayQueue* pQueue, ArrayQueueNode element);
 ArrayQueueNode *dequeueAQ(ArrayQueue* pQueue);
 ArrayQueueNode *peekAQ(ArrayQueue* pQueue);
 void deleteArrayQueue(ArrayQueue* pQueue);
-ArrayQueue* copyArrayQueue(ArrayQueue* pQueue);
+ArrayQueue* copyArrayQueue(ArrayQueue* pQueue, int maxElementCount);
 void    displayAq(ArrayQueue* pQueue);
 
 #endif

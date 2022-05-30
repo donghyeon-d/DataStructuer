@@ -10,7 +10,7 @@ typedef struct ArrayBinTreeType
 {
 	int maxElementCount;		// 최대 원소 개수
 	int currentElementCount;	// 현재 원소의 개수
-	ArrayBinTreeNode *pElement;	// 원소 저장을 위한 1차원 배열
+	ArrayBinTreeNode  *pElement;	// 원소 저장을 위한 1차원 배열
 } ArrayBinTree;
 
 ArrayBinTree		*makeArrayBinTree(int maxElementCount);
