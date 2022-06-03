@@ -69,3 +69,8 @@ int		cycleCheck(t_prim *prim, t_Adge temp)
 	free(visited);
 	return (FALSE);
 }
+
+
+
+
+void cycleCheck()
