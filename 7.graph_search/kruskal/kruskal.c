@@ -63,6 +63,44 @@ void	sortVertexList(t_Adge *vertexList, int len)
 	return ;
 }
 
+int find_set(t_kruskal *kruskal, int **set, int vertex)
+{
+	if (set[kruskal->graph->maxVertexCount][vertex] == 1)
+		return (vertex);
+	for (int j = 0; j < (kruskal->graph->maxVertexCount + 1); j++)
+	{
+		if (set[vertex][j] == 1 || set[j][vertex] == 1)
+			return (j);
+	}
+	return (-1);// 유효하지 않은 vertex
+}//return = 집합
+
+void	merge_set(t_kruskal *kruskal, int **set, int fromSet, int toSet)
+{
+	
+	for (int i = 0; i < kruskal->graph->maxVertexCount; i++)
+	{
+		set[fromSet][i] += set[toSet][i];
+		set[toSet][i] = 0;
+	}
+	set[fromSet][toSet] = 1;
+	set[kruskal->graph->maxVertexCount][toSet] = 0;
+}
+
+int cycleCheck(t_kruskal *kruskal, int **set, int fromVertex, int toVertex)
+{
+	int fromSet;
+	int toSet;
+
+	fromSet = find_set(kruskal, set, fromVertex);
+	toSet = find_set(kruskal, set, toVertex);
+	if (fromSet == toSet)
+		return (TRUE);
+	else
+		merge_set(kruskal, set, fromSet, toSet);
+	return (FALSE);
+}
+
 t_Adge *createVertexList(t_kruskal *kruskal)
 {
 	t_Adge *vertexList;
@@ -156,33 +194,39 @@ int		deletekruskal(t_kruskal **kruskal)
 // 	return (FALSE);
 // }
 
-int	cycleCheck(t_kruskal *kruskal)
-{
-	char	**set;
-	int		max = kruskal->graph->maxVertexCount + 1;
+// int	cycleCheck(t_kruskal *kruskal)
+// {
+// 	char	**set;
+// 	int		max = kruskal->graph->maxVertexCount + 1;
 
-	set = (char **)malloc(sizeof(char *) * max);
-	for (int i = 0, i < max; i++)
-		set[i] = malloc(sizeof(char) * max);
-	for (int i = 0, i < max; i++)
-	{
-		for (int j = 0; j < max; j++)
-			set[i][j] = 0;
-	}
-	for (int i = 0, i < max; i++)
-		set[max - 1][i] = 1;
-}
+// 	set = (char **)malloc(sizeof(char *) * max);
+// 	for (int i = 0, i < max; i++)
+// 		set[i] = malloc(sizeof(char) * max);
+// 	for (int i = 0, i < max; i++)
+// 	{
+// 		for (int j = 0; j < max; j++)
+// 			set[i][j] = 0;
+// 	}
+// 	for (int i = 0, i < max; i++)
+// 		set[max - 1][i] = 1;
+// }
 
 
 void	kruskalAlgo(t_kruskal *kruskal)
 {
 	int	idx;
 	t_Adge temp;
+	int **set;
 
+	set = malloc(sizeof(int *) * (kruskal->graph->maxVertexCount + 1));
+	for (int i = 0; i < (kruskal->graph->maxVertexCount + 1); i++)
+		set[i] = calloc(kruskal->graph->maxVertexCount, sizeof(int));
+	for (int i = 0; i < (kruskal->graph->maxVertexCount + 1); i++)
+		set[kruskal->graph->maxVertexCount][i] = 1;
 	idx = 0;
 	for (int i = 0; i < kruskal->vertexCount; i++)
 	{
-		if (!cycleCheck(kruskal, kruskal->vertexList[i]))
+		if (!cycleCheck(kruskal, set, kruskal->vertexList[i].fromVertex, kruskal->vertexList[i].toVertex))
 		{
 			kruskal->resTable[idx++] = kruskal->vertexList[i];
 			temp = kruskal->vertexList[i];
