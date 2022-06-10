@@ -41,7 +41,7 @@ void dfs(LinkedGraph *graph)
                 }
                 edge = edge->ppAdjEdge;
             }
-       }
+        }
     }
 }
 
@@ -116,7 +116,7 @@ int main()
     addEdgeAG(graph, 2, 5);
     addEdgeAG(graph, 2, 6);
     addEdgeAG(graph, 3, 7);
-    addEdgeAG(graph, 4, 5);
+    addEdgeAG(graph, 4, 5); 
     printf("\nBreadth First Search\n");
     bfs(graph);
     return (0);

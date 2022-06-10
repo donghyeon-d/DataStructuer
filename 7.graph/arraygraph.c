@@ -87,6 +87,7 @@ int addVertexAG(ArrayGraph* pGraph, int vertexID)
     if ((pGraph->pVertex)[vertexID] == 0)
     {
         (pGraph->pVertex)[vertexID] = 1;
+        pGraph->currentVertexCount++;
         return (TRUE);
     }
     else
@@ -131,6 +132,7 @@ int removeVertexAG(ArrayGraph* pGraph, int vertexID)
         (pGraph->ppAdjEdge)[vertexID][i] = 0;
     }
     (pGraph->pVertex)[vertexID] = 0;
+    pGraph->currentVertexCount--;
     return (TRUE);
 }
 

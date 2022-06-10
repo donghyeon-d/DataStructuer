@@ -52,7 +52,7 @@ ArrayBinTreeNode	*deleteMaxHeap(ArrayBinTree *pbintree)
 	pbintreeNode[parent] = n;
 	return (pdelete);
 }
-
+/*
 <<<<<<< HEAD
 int	insertMinHeap(ArrayBinTree *pbintree, int data)
 {
@@ -143,3 +143,4 @@ int main()
 >>>>>>> b173593f5676b37e1aa5e36aeeef49501d5f73a1
 	displayArrayBinTree(ptree);
 }
+*/

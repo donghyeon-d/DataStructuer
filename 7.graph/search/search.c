@@ -27,6 +27,7 @@ void dfs(LinkedGraph *graph)
 		popNode = popLS(stack);
 		printf("%d -> ", popNode->vertexID);
 		edge = (graph->pVertex)[popNode->vertexID].ppAdjEdge;
+		free(edge);//
 		while (edge != NULL)
 		{
 			pushNode.vertexID = edge->vertexID;
@@ -59,6 +60,7 @@ void bfs(LinkedGraph *graph)
 		dequeNode = dequeueAQ(queue);
 		printf("%d -> ", dequeNode->vertexID);
 		edge = (graph->pVertex)[dequeNode->vertexID].ppAdjEdge;
+		free(dequeNode);//
 		while (edge)
 		{
 			enqueNode.vertexID = edge->vertexID;
