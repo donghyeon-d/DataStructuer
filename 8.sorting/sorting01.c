@@ -41,7 +41,7 @@ void	bubble(int *arr, int len)
 	}
 }
 
-void	quick(int *arr, int left_idx, int right_idx)
+void	quick_middle_pivot(int *arr, int left_idx, int right_idx)
 {
 	int	i;
 	int	j;
@@ -63,7 +63,7 @@ void	quick(int *arr, int left_idx, int right_idx)
 	if (i < right_idx)
 		quick(arr, i + 1, right_idx);
 }
-void	quick_01(int *arr, int left_idx, int right_idx)
+void	quick_right_pivot(int *arr, int left_idx, int right_idx)
 {
 	int	i;
 	int	j;
@@ -80,19 +80,41 @@ void	quick_01(int *arr, int left_idx, int right_idx)
 			j--;
 		if(i < j)
 			ft_swap(&arr[i], &arr[j]);
-		for (int i = 0; i < 8; i++)
-			printf("%d ", arr[i]);
-		printf("\n");
+		// for (int i = 0; i < 8; i++)
+		// 	printf("%d ", arr[i]);
+		// printf("\n");
 	}
 	ft_swap(&arr[i], &arr[right_idx]);
 	if (i > left_idx)
 		quick(arr, left_idx, i - 1);
 	if (i < right_idx)
 		quick(arr, i + 1, right_idx);
-
-
 }
 
+void	quick_left_pivot(int *arr, int left_idx, int right_idx)
+{
+	int	i;
+	int	j;
+	int	pivot;
+
+	i = left_idx;
+	j = right_idx - 1;
+	pivot = arr[left_idx];
+	while(i < j)
+	{
+		while(arr[i] < pivot)
+			i++;
+		while(arr[j] > pivot)
+			j--;
+		if(i < j)
+			ft_swap(&arr[i], &arr[j]);
+	}
+	ft_swap(&arr[j], &arr[right_idx]);
+	if (i > left_idx)
+		quick(arr, left_idx, i - 1);
+	if (i < right_idx)
+		quick(arr, i + 1, right_idx);
+}
 
 void	insertion(int *arr, int len)
 {
