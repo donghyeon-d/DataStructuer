@@ -138,6 +138,52 @@ void	insertion(int *arr, int len)
 	}
 }
 
+static void	make_maxheap(int *arr, int len)
+{
+	int	idx;
+
+	for (int i = 0; i < len; i++)
+	{
+		idx = i;
+		while (idx > -1 && arr[idx] > arr[(idx - 1) / 2])
+		{
+			ft_swap(&arr[idx], &arr[(idx - 1) / 2]);
+			idx = (idx - 1) / 2;
+		}
+	}
+}
+
+// static void	to_maxheap(int *arr)
+// {
+// 	int	idx;
+// 	int left_child;
+// 	int right_child;
+
+// 	idx = 0;
+// 	left_child = idx * 2 + 1;
+// 	right_child = left_child + 1;
+// 	if (arr[idx] < arr[left_child])
+// 	{
+// 		ft_swap(&arr[idx], &arr[left_child]);
+// 		idx = left_child;
+// 	}
+// 	if (arr[idx] < arr[right_child])
+// 	{
+// 		ft_swap(&arr[idx], &arr[right_child]);
+// 		idx = right_child;
+// 	}
+// }
+
+void	ft_heapsort(int *arr, int len)
+{
+	make_maxheap(arr, len);
+	for (int i = len; i > 0; i--)
+	{
+		ft_swap(&arr[0], &arr[i - 1]);
+		make_maxheap(arr, i - 1);
+	}
+}
+
 int main()
 {
 
