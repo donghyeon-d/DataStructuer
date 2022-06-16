@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedqueue.h"
+#include "../4.que/linkedqueue/linkedqueue_dongchoi.c"
 
 // #define MAX_SIZE 10
 
@@ -69,6 +69,7 @@ void	quick(int *arr, int left_idx, int right_idx)
 	if (i < right_idx)
 		quick(arr, i + 1, right_idx);
 }
+
 void	quick_rightpivot(int *arr, int left_idx, int right_idx)
 {
 	int	i;
@@ -95,10 +96,7 @@ void	quick_rightpivot(int *arr, int left_idx, int right_idx)
 		quick(arr, left_idx, i - 1);
 	if (i < right_idx)
 		quick(arr, i + 1, right_idx);
-
-
 }
-
 
 void	insertion(int *arr, int len)
 {
@@ -142,10 +140,6 @@ static void	shell_util(int *arr, int len, int gap, int start)
 		}
 		arr[idx] = tmp;
 	}
-	// printf("gap : %d\n", gap);
-	// for(int i = 0; i < len; i++)
-	// 	printf("%d", arr[i]);
-	// printf("\n");
 }
 
 void	shell(int *arr, int len)
@@ -162,7 +156,7 @@ void	shell(int *arr, int len)
 		{
 			if (i + gap > len - 1)
 				break ;
-			shell_util(arr, len, gap, i);
+			shell_util(arr, len, gap, i);// gap 으로 나눈 부분집집합 1개 삽입정렬
 		}
 		gap /= 2;
 		if (gap != 0 && gap % 2 == 0)
@@ -268,7 +262,7 @@ void	radix(int *arr, int len)
 			free(element);
 		}
 		int	k = 0;
-		while(k < len)
+		while (k < len)
 		{
 			element = dequeueLQ(queue[idx]);
 			if(!element)
@@ -289,6 +283,7 @@ void	ft_heapsort(int *arr, int len)
 {
 	int idx;
 
+	//heap 모양으로 만들어줌
 	for (int i = 1; i < len; i++)
 	{
 		idx = i;
@@ -297,8 +292,8 @@ void	ft_heapsort(int *arr, int len)
 			ft_swap(&arr[idx], &arr[(idx - 1) / 2]);
 			idx = (idx - 1) / 2;
 		}
-
 	}
+	// 바꿔주고 0번째 있는 원소를 자식과 비교하면서 바꿔주며 maxheap으로 만듦
 	while (len > 0)
 	{
 		ft_swap(&arr[0], &arr[len - 1]);
