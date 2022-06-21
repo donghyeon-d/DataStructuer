@@ -65,11 +65,10 @@ int		addPair(t_hashTable *table, t_pair pair)
 		// 충돌시 해결
 		// 1. 선형 조사법
 		// index = linearProbing_add(table, index, pair.key);
-		// index = quadricProbing_add(table, index, pair.key);
-		index = DoubleProbing_add(table, index, pair.key);
 		// 2. 제곱 조사법
+		// index = quadricProbing_add(table, index, pair.key);
 		// 3. 이중 해싱
-		// index = fun_add();
+		index = DoubleProbing_add(table, index, pair.key);
 		if (index < 0)
 			return (FALSE);
 	}
@@ -128,7 +127,6 @@ int     quadricProbing_add(t_hashTable *table, int index, int key)
         return (-1);
     count = 1;
 	newIndex = (key + (count * count)) % table->maxCount;
-    // newIndex = (index % table->maxCount) + count * count;
     while (table->used[newIndex] == USE)
     {
         if (table->hashTable[index].key == key)
@@ -140,7 +138,6 @@ int     quadricProbing_add(t_hashTable *table, int index, int key)
 		if (count > table->maxCount)
 			return (-1);
 		newIndex = (key + (count * count)) % table->maxCount;
-        // newIndex = (index % table->maxCount) + count * count;
     }
     return (newIndex);
 }
@@ -267,7 +264,6 @@ t_pair	*deletePair(t_hashTable *table, t_pair pair)//pop
 		// index = quadricProbing_del(table, index, pair.key);
 		index = DoubleProbing_del(table, index, pair.key);
 		// 3. 이중 해싱	 add, del
-		// index = fun_del();
 		if (index < 0)
 			return (NULL);
 	}
@@ -292,7 +288,6 @@ t_pair	*searchPair(t_hashTable *table, t_pair pair) // peek
 		index = quadricProbing_del(table, index, pair.key);
 		// 3. 이중 해싱	 add, del
 		index = DoubleProbing_del(table, index, pair.key);
-		// index = fun_del();
 		if (index < 0)
 			return (NULL);
 	}
@@ -309,13 +304,13 @@ void	displayTable(t_hashTable *table)
 int main()
 {
 	t_hashTable	*table = createHashTable(11);
-	// t_pair		pair1 = {1, 1};
+	t_pair		pair1 = {1, 1};
 	t_pair		pair3 = {3, 3};
 	t_pair		pair8 = {8, 8};
 	t_pair		pair13 = {13, 13};
 	t_pair		pair18 = {18, 18};
 	t_pair		pair23 = {23, 23};
-	// addPair(table, pair1);	displayTable(table);
+	addPair(table, pair1);	displayTable(table);
 	addPair(table, pair3);	displayTable(table);
 	addPair(table, pair8);	displayTable(table);
 	addPair(table, pair13);	displayTable(table);
@@ -324,12 +319,12 @@ int main()
 
 	printf("========del========\n");
 	// del
-	// deletePair(table, pair1);	displayTable(table);
+	deletePair(table, pair1);	displayTable(table);
 	deletePair(table, pair8);	displayTable(table);
 	deletePair(table, pair18);	displayTable(table);
 	deletePair(table, pair3);	displayTable(table);
 	// addPair(table, pair1);		displayTable(table);
-	addPair(table, (t_pair){1, 5}); displayTable(table);
-	addPair(table, (t_pair){18, 12}); displayTable(table);
-	addPair(table, (t_pair){18, 15}); displayTable(table);
+	// addPair(table, (t_pair){1, 5}); displayTable(table);
+	// addPair(table, (t_pair){18, 12}); displayTable(table);
+	// addPair(table, (t_pair){18, 15}); displayTable(table);
 }
